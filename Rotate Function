@@ -1,0 +1,45 @@
+
+//Time Complexity: O(n^2) - brute force solution
+class Solution {
+    public int maxRotateFunction(int[] nums) {
+        int n = nums.length;
+        int res[] = new int[n];
+        int helper=0;
+        for(int i=0; i<n; i++){
+            int pos=0;
+            for(int j=helper, k=0; j<n; j++, k++){
+                res[i]+=nums[k]*j;
+                pos=k;
+                
+            }
+            for(int k=pos+1, j=0; k<n; k++, j++){
+                res[i]+=nums[k]*j;
+            }
+            helper++;
+        }int max=Integer.MIN_VALUE;
+        for(int i=0; i<n; i++){
+            if(max<res[i])max=res[i];
+        }return max;
+    }
+}
+
+//Time Complexity: O(n) - mathematical approach
+//f(1)=f(0)+tot-n*nums[i]  where, i->n-1 to 0
+//f(2)=f(0)+tot-n*nums[i]   i=n-2;
+//f(3)=f(0)+tot-n*nums[i]   i=n-3;
+//          ...              ...
+class Solution {
+    public int maxRotateFunction(int[] nums) {
+        int n = nums.length;
+        int fn=0, tot=0;
+        for(int i=0; i<n; i++){
+            fn+=i*nums[i];
+            tot+=nums[i];
+        }
+        int max = fn;
+        for(int i=n-1; i>=0; i--){
+            fn = fn+tot-n*(nums[i]);
+            if(max<fn)max=fn;
+        }return max;
+    }
+}
