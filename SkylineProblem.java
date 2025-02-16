@@ -74,6 +74,8 @@ public class SkylineProblem {
      *         return res;
      *     }
      * }
+     *
+     * video explanation - https://leetcode.com/problems/the-skyline-problem/solutions/61193/Short-Java-solution/comments/62419/
      */
 
         public List<List<Integer>> getSkyline(int[][] buildings) {
